@@ -1,5 +1,5 @@
 var express = require('express');
-
+var todoContoller = require('./controllers/todoController');
 var app = express();
 
 // set up template engine 
@@ -8,6 +8,8 @@ var app = express();
  // static files
 app.use(express.static('./public'))
 
+//fire controllers
+todoContoller(app);
 
 // listen to port
 app.listen(8080);
