@@ -28,8 +28,11 @@ app.get('/todo', function(req, res){
 });
 
 app.post('/todo', urlencodedParser, function(req, res){
-   data.push(req.body);
-   res.json(data);
+   // get data from the view and add it to mongodb 
+   var newTodo = Todo(req.body).save(function(err, data){
+       if (err) throw err;
+       res.json(data);
+   })
 });
 
 app.delete('/todo/:item', function(req, res){
