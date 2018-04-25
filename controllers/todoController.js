@@ -36,11 +36,11 @@ app.post('/todo', urlencodedParser, function(req, res){
 });
 
 app.delete('/todo/:item', function(req, res){
-    data = data.filter(function(todo){
-        return todo.item.replace(/ /g,'-') !== req.params.item;
+    // delete the requested item from monogodb
+    Todo.find({item: req.params.item.replace(/\-/g," ")}).remove(function(err, data){
+        if (err) throw err;
+        res.json(data);
     });
-    res.json(data);
-
 });
 
 }
